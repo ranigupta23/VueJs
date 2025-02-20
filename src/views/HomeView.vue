@@ -20,8 +20,11 @@
 
 
 <script setup>
-   import {reactive,computed,watch} from 'vue'
+   import {reactive,computed,watch, onBeforeMount,onMounted,onBeforeUnmount,onUnmounted, onActivated, onDeactivated, onBeforeUpdate, onUpdated} from 'vue'
    const appTitle="My Amazing Counter App"
+   onMounted(()=>{
+      console.log("Do stuff related to app title")
+   })
    const counterData=reactive({
       count:0,
       title:"My Counter"
@@ -46,6 +49,35 @@
    const decreaseCounter=(amount)=>{
       counterData.count-=amount
       }
+   
+      onMounted(()=>{
+      console.log("Do stuff related to counter")
+   })
+   
+   onBeforeMount(()=>{
+      console.log("OnBeforeMount")
+   })
+   onMounted(()=>{
+      console.log("OnMounted")
+   })
+   onBeforeUnmount(()=>{
+      console.log("OnBeforeUnmount")
+   })
+   onUnmounted(()=>{
+      console.log("OnUnmounted")
+   })
+   onActivated(()=>{
+      console.log('onActivated')
+   })
+   onDeactivated(()=>{
+      console.log('onDeactivated')
+   })
+   onBeforeUpdate(()=>{
+      console.log("onBeforeUpdate")
+   })
+   onUpdated(()=>{
+      console.log("onUpdated")
+   })
 </script>
 
 <style>
