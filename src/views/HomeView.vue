@@ -12,7 +12,7 @@
     <p>This Counter is {{ OddorEven }}</p>
     <div class="edit">
       <h4>Edit Counter Title:</h4>
-      <input v-model="counterData.title" type="text"/>
+      <input v-model="counterData.title" type="text" v-autofocus/>
     </div>
  </div>
 </template>
@@ -21,6 +21,7 @@
 
 <script setup>
    import {reactive,computed,watch, onBeforeMount,onMounted,onBeforeUnmount,onUnmounted, onActivated, onDeactivated, onBeforeUpdate, onUpdated} from 'vue'
+   import { vAutofocus } from '@/directives/vAutofocus'
    const appTitle="My Amazing Counter App"
    onMounted(()=>{
       console.log("Do stuff related to app title")
@@ -54,30 +55,16 @@
       console.log("Do stuff related to counter")
    })
    
-   onBeforeMount(()=>{
-      console.log("OnBeforeMount")
-   })
-   onMounted(()=>{
-      console.log("OnMounted")
-   })
-   onBeforeUnmount(()=>{
-      console.log("OnBeforeUnmount")
-   })
-   onUnmounted(()=>{
-      console.log("OnUnmounted")
-   })
-   onActivated(()=>{
-      console.log('onActivated')
-   })
-   onDeactivated(()=>{
-      console.log('onDeactivated')
-   })
-   onBeforeUpdate(()=>{
-      console.log("onBeforeUpdate")
-   })
-   onUpdated(()=>{
-      console.log("onUpdated")
-   })
+/*
+Directives
+local to this component only
+*/
+// const vAutofocus={
+//    // here we can add lifecycle hook
+//    mounted:(el)=>{
+//       el.focus()
+//    }
+// }
 </script>
 
 <style>
