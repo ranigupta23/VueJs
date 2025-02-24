@@ -1,44 +1,53 @@
 <template>
-  <div class="post-detail">
-     <h1>This is post page</h1>
-     <p>Display the content of post with ID of  {{$route.params.id}}</p>
-     <div>
-         <button @click="showPostId">Show Post ID</button>
-     </div>
-     <div>
-         <button @click="goHomeIn3seconds">Go Home in 3 seconds</button>
-     </div>
-     <div>
-         <button @click="goToFirstPost">Go To First Post</button>
-     </div>
-     <p><RouterLink to="/posts">&lt; Back</RouterLink></p>
-  </div>
+   <div class="posts">
+     <h1>Posts</h1>
+ 
+     <ul>
+       <li
+         v-for="post in posts"
+         :key="post.id"
+       >
+         <RouterLink :to="`/postDetail/${ post.id }`">{{ post.title }}</RouterLink>
+       </li>
+     </ul>
+ 
+     <textarea v-autofocus />
+   </div>
  </template>
-
+ 
  <script setup>
- import {useRoute,useRouter} from 'vue-router'
- const route=useRoute()
- const router=useRouter()
- const showPostId=()=>{
-   // console.log("Show Post Id")
-   alert(`The ID of this post is : ${route.params.id}`)
+ /*
+   imports
+ */
+ 
+   import { ref } from 'vue'
+   import { vAutofocus } from '@/directives/vAutofocus'
+ 
+ /*
+   posts
+ */
+ 
+   const posts = ref([
+     {
+       id: 'id1',
+       title: 'Post 1'
+     },
+     {
+       id: 'id2',
+       title: 'Post 2'
+     },
+     {
+       id: 'id3',
+       title: 'Post 3'
+     }
+   ])
+ 
+ </script>
+ 
+ <style scoped>
+ ul {
+   margin-bottom: 30px;
  }
- const goHomeIn3seconds=()=>{
-   setTimeout(()=>{
-      // router.push("/")
-      // if we want push by name
-      router.push({name:'home'})
-   },3000)
- }
- const goToFirstPost=()=>{
-      router.push({
-         name:'postDetail',
-         params:{
-            id:'id1'
-         }
-      })
-  
- }
-</script>
+ </style>
 
  
