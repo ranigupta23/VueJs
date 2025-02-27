@@ -1,7 +1,9 @@
 <template>
  <div class="home">
    <h2 ref="appTitleRef">{{ appTitle }}</h2>
+
    <h3>{{ counterData.title}}</h3>
+
     <div>
       <button @click="decreaseCounter(2)" class="btn">--</button>
          <button @click="decreaseCounter(1)" class="btn">-</button>
@@ -20,58 +22,20 @@
 
 
 <script setup>
-   import {ref,reactive,computed,watch, onBeforeMount,onMounted,nextTick} from 'vue'
+   import {ref,onMounted} from 'vue'
    import { vAutofocus } from '@/directives/vAutofocus'
+   import { useCounter } from '@/use/useCounter'
 
    const appTitle="My Amazing Counter App"
 
    const appTitleRef=ref(null)
+
    onMounted(()=>{
-      // console.log("Do stuff related to app title")
       console.log(`The app title is ${appTitleRef.value.offsetWidth}`)
    })
-   const counterData=reactive({
-      count:0,
-      title:"My Counter"
-   })
-   // watch
-   watch(()=>counterData.count,(newCount,oldCount)=>{
-      if(newCount===20){
-         alert('Way to go! You made it to 20!')
-      }
-   })
-   // computed properties
-   const OddorEven=computed(()=>{
-      if(counterData.count%2===0) return 'Even'
-      return 'Odd'
-   })
-   // passing parameter to methods
-   const increaseCounter=(amount,event)=>{
-         // console.log(amount)
-         // console.log(event);
-         counterData.count+=amount
-         nextTick(()=>{
-            console.log('do something when counter has updated in the DOM')
-         })
-      }
-   const decreaseCounter=(amount)=>{
-      counterData.count-=amount
-      }
-   
-      onMounted(()=>{
-      console.log("Do stuff related to counter")
-   })
-   
-/*
-Directives
-local to this component only
-*/
-// const vAutofocus={
-//    // here we can add lifecycle hook
-//    mounted:(el)=>{
-//       el.focus()
-//    }
-// }
+
+   const {counterData,OddorEven,increaseCounter,decreaseCounter}=useCounter()
+
 </script>
 
 <style>
